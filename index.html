@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f1e8">
+  <title>Joana & Carlos | Capítulo VIII</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+    :root {
+      --navy: #102c52;
+      --paper: #f6f2e9;
+      --paper-2: #fbf8f1;
+      --line: rgba(16, 44, 82, .28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--paper);
+      color: var(--navy);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .site {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,.55), transparent 35%),
+        var(--paper);
+    }
+
+    /* ---------- HERO ---------- */
+
+    .hero {
+      text-align: center;
+      padding: clamp(34px, 6vw, 72px) 24px 0;
+    }
+
+    .logo {
+      display: block;
+      width: min(360px, 72vw);
+      height: auto;
+      margin: 0 auto;
+    }
+
+    /* ---------- PAISAGEM ---------- */
+
+    .landscape {
+      width: 100%;
+      margin: clamp(28px, 5vw, 55px) 0 0;
+      line-height: 0;
+    }
+
+    .landscape img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* ---------- TEXTO ---------- */
+
+    .content {
+      position: relative;
+      text-align: center;
+      padding: clamp(38px, 5vw, 62px) 22px 0;
+    }
+
+    .names {
+      margin: 0;
+      font-family: "Allura", "Brush Script MT", cursive;
+      font-weight: 400;
+      font-size: clamp(48px, 7vw, 82px);
+      line-height: 1;
+      letter-spacing: .015em;
+      text-transform: none;
+    }
+
+    .intro {
+      margin: clamp(19px, 3vw, 28px) auto 0;
+      max-width: 760px;
+      font-size: clamp(12px, 1.65vw, 18px);
+      line-height: 1.9;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    .date {
+      margin: clamp(22px, 3vw, 30px) 0 0;
+      font-size: clamp(29px, 5vw, 55px);
+      line-height: 1;
+      font-weight: 400;
+      letter-spacing: .14em;
+    }
+
+    .venue {
+      margin-top: 18px;
+      font-size: clamp(12px, 1.65vw, 18px);
+      line-height: 1.6;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+
+    .divider {
+      width: 72px;
+      height: 1.5px;
+      margin: clamp(27px, 4vw, 38px) auto 25px;
+      background: var(--navy);
+    }
+
+    .phrase {
+      display: block;
+      width: min(700px, 91%);
+      height: auto;
+      margin: 0 auto;
+    }
+
+    /* ---------- BOTÕES ---------- */
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      padding: clamp(42px, 6vw, 68px) 10% 58px;
+    }
+
+    .action {
+      min-height: 60px;
+      display: grid;
+      grid-template-columns: 48px 1fr 24px;
+      align-items: center;
+      padding: 0 18px;
+      border: 1.5px solid var(--navy);
+      border-radius: 9px;
+      background: rgba(251, 248, 241, .72);
+      color: var(--navy);
+      text-decoration: none;
+      transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+    }
+
+    .action:hover,
+    .action:focus-visible {
+      background: var(--navy);
+      color: var(--paper-2);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .icon {
+      width: 25px;
+      height: 25px;
+      justify-self: center;
+      display: block;
+    }
+
+    .label {
+      text-align: center;
+      font-size: clamp(11px, 1.55vw, 16px);
+      letter-spacing: .21em;
+      text-transform: uppercase;
+      padding-left: 5px;
+    }
+
+    .arrow {
+      font-size: 25px;
+      line-height: 1;
+      font-family: Arial, sans-serif;
+      font-weight: 300;
+      justify-self: end;
+    }
+
+    /* ---------- RODAPÉ ---------- */
+
+    footer {
+      padding: 0 20px 35px;
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: .25em;
+      opacity: .55;
+      text-transform: uppercase;
+    }
+
+    /* ---------- MOBILE ---------- */
+
+    @media (max-width: 600px) {
+      .hero {
+        padding-top: 27px;
+      }
+
+      .logo {
+        width: min(285px, 73vw);
+      }
+
+      .landscape {
+        margin-top: 20px;
+      }
+
+      .content {
+        padding-top: 28px;
+      }
+
+      .names {
+        font-size: clamp(48px, 15vw, 70px);
+        letter-spacing: .01em;
+      }
+
+      .intro {
+        margin-top: 17px;
+        line-height: 1.75;
+        letter-spacing: .14em;
+      }
+
+      .date {
+        letter-spacing: .08em;
+      }
+
+      .venue {
+        letter-spacing: .14em;
+      }
+
+      .divider {
+        margin-top: 27px;
+        margin-bottom: 19px;
+      }
+
+      .phrase {
+        width: 92%;
+      }
+
+      .actions {
+        gap: 8px;
+        padding: 34px 7% 38px;
+      }
+
+      .action {
+        min-height: 52px;
+        grid-template-columns: 35px 1fr 18px;
+        padding: 0 10px;
+        border-radius: 8px;
+      }
+
+      .icon {
+        width: 21px;
+        height: 21px;
+      }
+
+      .label {
+        font-size: 9.5px;
+        letter-spacing: .14em;
+      }
+
+      .arrow {
+        font-size: 21px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="site">
+
+    <!-- LOGOTIPO -->
+    <header class="hero">
+      <img
+        class="logo"
+        src="https://i.ibb.co/k6PxxBJ6/joana-carlos-logotipo-maxima-qualidade-sem-fundo-1.png"
+        alt="J | C — Capítulo VIII"
+      >
+    </header>
+
+    <!-- IMAGEM PRINCIPAL: MONTANHA + BARCO + MAR -->
+    <section class="landscape" aria-label="Paisagem">
+      <img
+        src="https://i.ibb.co/sJsfL1R1/joana-carlos-imagem-principal-sem-picotado-1.png"
+        alt="Paisagem marítima com barco, montanhas e costa"
+      >
+    </section>
+
+    <!-- INFORMAÇÃO DO CASAMENTO -->
+    <section class="content">
+
+      <h1 class="names">Joana &amp; Carlos</h1>
+
+      <p class="intro">
+        Convidam-vos a fazer parte<br>
+        deste novo capítulo da nossa história
+      </p>
+
+      <div class="date">15 · 08 · 2027</div>
+
+      <div class="venue">Quinta do David II · Palmela</div>
+
+      <div class="divider"></div>
+
+      <!-- FRASE MANUSCRITA -->
+      <img
+        class="phrase"
+        src="https://i.ibb.co/Z6z6ZcHj/joana-carlos-frase-sem-fundo-4x-1.png"
+        alt="Onde tudo começou. Onde começa o para sempre."
+      >
+
+    </section>
+
+    <!--
+      BOTÕES
+      Os dois links "#" ficam deliberadamente preparados para serem
+      substituídos quando tiveres os links de confirmação e informações.
+    -->
+    <nav class="actions" aria-label="Menu do casamento">
+
+      <!-- CONFIRMAR PRESENÇA -->
+      <a
+        class="action"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <rect x="3.5" y="4.5" width="17" height="16" rx="2"></rect>
+          <path d="M7.5 2.8v3.5M16.5 2.8v3.5M3.8 9h16.4"></path>
+          <path d="m8 14 2.1 2.1 5-5"></path>
+        </svg>
+        <span class="label">Confirmar presença</span>
+        <span class="arrow">→</span>
+      </a>
+
+      <!-- COMO CHEGAR -->
+      <a
+        class="action"
+        href="https://www.google.com/maps/place/38°35'12.1%22N+8°55'44.0%22W/@38.5866944,-8.9288889,17z/data=!3m1!4b1!4m4!3m3!8m2!3d38.5866944!4d-8.9288889?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <path d="M20 10.2c0 5.1-8 11-8 11s-8-5.9-8-11a8 8 0 1 1 16 0Z"></path>
+          <circle cx="12" cy="10.2" r="2.6"></circle>
+        </svg>
+        <span class="label">Como chegar</span>
+        <span class="arrow">→</span>
+      </a>
+
+      <!-- INFORMAÇÕES -->
+      <a
+        class="action"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 10.5v6"></path>
+          <circle cx="12" cy="7.3" r=".7" fill="currentColor" stroke="none"></circle>
+        </svg>
+        <span class="label">Informações</span>
+        <span class="arrow">→</span>
+      </a>
+
+    </nav>
+
+    <footer>
+      Joana &amp; Carlos · 15 · 08 · 2027
+    </footer>
+
+  </main>
+
+</body>
+</html>
