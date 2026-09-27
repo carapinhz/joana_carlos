@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmar Presença · Joana & Carlos</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #102c52;
+      --paper: #f6f2e9;
+      --paper-2: #fbf8f1;
+      --line: rgba(16,44,82,.22);
+      --muted: #647083;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(16,44,82,.035), transparent 28%),
+        linear-gradient(180deg, var(--paper-2), var(--paper));
+      color: var(--navy);
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .page {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      padding: 44px 22px 60px;
+    }
+
+    .card {
+      position: relative;
+      background: rgba(251,248,241,.92);
+      border: 1px solid rgba(16,44,82,.12);
+      padding: 42px clamp(24px, 6vw, 72px) 54px;
+      box-shadow: 0 12px 45px rgba(16,44,82,.07);
+      overflow: hidden;
+    }
+
+    .card::before,
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 105px;
+      height: 105px;
+      border: 1px solid rgba(16,44,82,.12);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .card::before {
+      top: -58px;
+      left: -58px;
+    }
+
+    .card::after {
+      bottom: -58px;
+      right: -58px;
+    }
+
+    .top {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .monogram {
+      width: min(190px, 58vw);
+      height: auto;
+      margin: 0 auto 18px;
+      display: block;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      font-size: 11px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Allura", "Brush Script MT", cursive;
+      font-size: clamp(52px, 8vw, 76px);
+      font-weight: 400;
+      line-height: .95;
+    }
+
+    .intro {
+      max-width: 560px;
+      margin: 16px auto 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    .rule {
+      width: 72px;
+      height: 1px;
+      background: var(--navy);
+      opacity: .3;
+      margin: 28px auto 0;
+    }
+
+    form {
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 27px;
+      font-weight: 600;
+      margin: 0 0 24px;
+    }
+
+    .field {
+      margin-bottom: 19px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.5);
+      color: var(--navy);
+      border-radius: 0;
+      padding: 13px 14px;
+      font: 400 15px "Montserrat", Arial, sans-serif;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--navy);
+      background: #fffdf8;
+      box-shadow: 0 0 0 3px rgba(16,44,82,.06);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .choice-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .choice {
+      position: relative;
+    }
+
+    .choice input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .choice label {
+      margin: 0;
+      padding: 15px 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.5);
+      text-align: center;
+      cursor: pointer;
+      font-size: 12px;
+      letter-spacing: .08em;
+      transition: all .2s;
+    }
+
+    .choice input:checked + label {
+      background: var(--navy);
+      color: white;
+      border-color: var(--navy);
+    }
+
+    .conditional {
+      display: none;
+      margin-top: 18px;
+    }
+
+    .conditional.show {
+      display: block;
+    }
+
+    .small-note {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 16px;
+    }
+
+    .submit-wrap {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    button {
+      appearance: none;
+      border: 0;
+      background: var(--navy);
+      color: white;
+      padding: 15px 34px;
+      font: 600 11px "Montserrat", Arial, sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .15s, opacity .15s;
+    }
+
+    button:hover { transform: translateY(-1px); }
+    button:active { transform: translateY(0); }
+
+    .back {
+      display: block;
+      width: fit-content;
+      margin: 28px auto 0;
+      color: var(--navy);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(16,44,82,.35);
+      padding-bottom: 3px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 17px;
+      opacity: .78;
+    }
+
+    @media (max-width: 620px) {
+      .page { padding: 18px 12px 35px; }
+      .card { padding: 30px 18px 42px; }
+      .grid { grid-template-columns: 1fr; gap: 0; }
+      .choice-group { grid-template-columns: 1fr; }
+      .intro { font-size: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <section class="card">
+
+      <header class="top">
+        <img
+          class="monogram"
+          src="https://i.ibb.co/k6PxxBJ6/joana-carlos-logotipo-maxima-qualidade-sem-fundo-1.png"
+          alt="Joana & Carlos"
+        >
+
+        <p class="eyebrow">15 · 08 · 2027 · Quinta do David II · Palmela</p>
+
+        <h1>Confirmação de presença</h1>
+
+        <p class="intro">
+          Ficamos muito felizes por partilhares connosco este dia tão especial.
+          Por favor, preenche o formulário abaixo até nos confirmares a tua presença.
+        </p>
+
+        <div class="rule"></div>
+      </header>
+
+      <!--
+        FORMULÁRIO:
+        Para receber as respostas por email, substitui "O-TEU-EMAIL" no action
+        pelo email que queres utilizar.
+      -->
+      <form action="https://formsubmit.co/joanarmpinto6@gmail.com" method="POST">
+
+        <input type="hidden" name="_subject" value="Confirmação de presença · Joana & Carlos">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="hidden" name="_next" value="https://carapinhz.github.io/joana_carlos/obrigado.html">
+
+        <h2 class="section-title">Os teus dados</h2>
+
+        <div class="grid">
+          <div class="field">
+            <label for="nome">Nome completo *</label>
+            <input id="nome" name="Nome" type="text" required>
+          </div>
+
+          <div class="field">
+            <label for="email">Email *</label>
+            <input id="email" name="Email" type="email" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Vais celebrar connosco? *</label>
+          <div class="choice-group">
+            <div class="choice">
+              <input id="sim" name="Presença" value="Sim, estarei presente" type="radio" required>
+              <label for="sim">Sim, estarei presente</label>
+            </div>
+
+            <div class="choice">
+              <input id="nao" name="Presença" value="Lamento, não poderei estar presente" type="radio">
+              <label for="nao">Lamento, não poderei estar</label>
+            </div>
+          </div>
+        </div>
+
+        <div id="presencaDetalhes" class="conditional">
+
+          <div class="grid">
+            <div class="field">
+              <label for="acompanhantes">Número de acompanhantes</label>
+              <select id="acompanhantes" name="Número de acompanhantes">
+                <option value="0">Apenas eu</option>
+                <option value="1">1 acompanhante</option>
+                <option value="2">2 acompanhantes</option>
+                <option value="3">3 acompanhantes</option>
+                <option value="4">4 acompanhantes</option>
+                <option value="5">5 acompanhantes</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="criancas">Crianças</label>
+              <select id="criancas" name="Número de crianças">
+                <option value="0">Nenhuma</option>
+                <option value="1">1 criança</option>
+                <option value="2">2 crianças</option>
+                <option value="3">3 crianças</option>
+                <option value="4">4 crianças</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="nomes">Nome dos acompanhantes</label>
+            <input id="nomes" name="Nomes dos acompanhantes" type="text" placeholder="Se aplicável">
+          </div>
+
+          <div class="field">
+            <label for="alimentacao">Restrições ou preferências alimentares</label>
+            <textarea id="alimentacao" name="Restrições alimentares" placeholder="Ex.: vegetariano, alergias, intolerâncias..."></textarea>
+          </div>
+
+        </div>
+
+        <div class="field">
+          <label for="mensagem">Mensagem para os noivos</label>
+          <textarea id="mensagem" name="Mensagem" placeholder="Se quiseres deixar-nos uma mensagem..."></textarea>
+        </div>
+
+        <div class="submit-wrap">
+          <button type="submit">Confirmar presença</button>
+        </div>
+
+      </form>
+
+      <a class="back" href="index.html">← Voltar ao convite</a>
+
+      <div class="footer">Joana & Carlos · 15 · 08 · 2027</div>
+
+    </section>
+  </main>
+
+  <script>
+    const sim = document.getElementById("sim");
+    const nao = document.getElementById("nao");
+    const detalhes = document.getElementById("presencaDetalhes");
+
+    function atualizarDetalhes() {
+      if (sim.checked) {
+        detalhes.classList.add("show");
+      } else {
+        detalhes.classList.remove("show");
+      }
+    }
+
+    sim.addEventListener("change", atualizarDetalhes);
+    nao.addEventListener("change", atualizarDetalhes);
+  </script>
+</body>
+</html>
