@@ -372,6 +372,12 @@
             <textarea id="alimentacao" name="Restrições alimentares" placeholder="Ex.: vegetariano, alergias, intolerâncias..."></textarea>
           </div>
 
+          <div class="field" id="idadeCriancasField" style="display:none;">
+            <label for="idadesCriancas">Idade das crianças</label>
+            <input id="idadesCriancas" name="Idade das crianças" type="text" placeholder="Ex.: 3 e 7 anos">
+            <p class="small-note">Indica a idade de cada criança, se aplicável.</p>
+          </div>
+
         </div>
 
         <div class="field">
@@ -407,6 +413,19 @@
 
     sim.addEventListener("change", atualizarDetalhes);
     nao.addEventListener("change", atualizarDetalhes);
+
+    const criancas = document.getElementById("criancas");
+    const idadeCriancasField = document.getElementById("idadeCriancasField");
+
+    function atualizarIdades() {
+      if (!criancas || !idadeCriancasField) return;
+      idadeCriancasField.style.display = criancas.value !== "0" ? "block" : "none";
+    }
+
+    if (criancas) {
+      criancas.addEventListener("change", atualizarIdades);
+      atualizarIdades();
+    }
   </script>
 </body>
 </html>
